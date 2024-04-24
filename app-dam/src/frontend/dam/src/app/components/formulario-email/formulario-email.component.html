@@ -1,3 +1,26 @@
-<p>
-  formulario-email works!
-</p>
+<div class="form-container ">
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Primera linea de título</ion-label>
+      <ion-input formControlName="titulo1" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fruit</ion-label>
+      <ion-select formControlName="favoriteFruit">
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>¿Alguna tasa que mostrar en legal?</ion-label>
+      <ion-checkbox formControlName="haveTasa" slot="start"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-button type="submit" expand="full">Submit</ion-button>
+</form>
+</div>

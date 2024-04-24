@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SegmentosService } from '../services/segmentos.service';
 import { LoginService } from '../services/login.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
