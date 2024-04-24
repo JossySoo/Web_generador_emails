@@ -8,7 +8,7 @@ var express = require('express');
 var app = express();
 var pool = require('./mysql-connector');
 const jwt = require('jsonwebtoken')
-const routerSegmentos = require('./routes/dispositivos')
+const routerSegmentos = require('./routes/segmentos')
 
 const YOUR_SECRET_KEY = 'mi llave'
 var testUser = {username: 'test', password: '1234'}
