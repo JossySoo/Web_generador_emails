@@ -24,6 +24,7 @@ export class LoginService {
 
   logout () {
     localStorage.removeItem('token')
+    this._router.navigate(['/login'])
   }
 
   public get logIn (): boolean {

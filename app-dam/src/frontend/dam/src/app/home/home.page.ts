@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SegmentosService } from '../services/segmentos.service';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { SegmentosService } from '../services/segmentos.service';
 })
 export class HomePage implements OnInit, OnDestroy {
 
-  constructor(private _segmentosService: SegmentosService) {}
+  constructor(private _segmentosService: SegmentosService,
+              private _loginService: LoginService  ) {}
 
   async ngOnInit() {
     await this._segmentosService.getSegmentos()
@@ -20,6 +22,10 @@ export class HomePage implements OnInit, OnDestroy {
         console.log(error)
       })
     console.log('Me ejecuto primero')
+  }
+
+  onLogout() {
+      this._loginService.logout()
   }
 
   ngOnDestroy(): void {
