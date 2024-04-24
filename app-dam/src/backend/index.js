@@ -69,7 +69,7 @@ var cb2 = function (req, res, next) {
 // app.get('/', [cb0, cb1, cb2]);
 app.get('/', cb2);
 
-app.post('/login', (req, res) => {
+/* app.post('/login', (req, res) => {
     if (req.body) {
         var userData = req.body
 
@@ -89,11 +89,60 @@ app.post('/login', (req, res) => {
             errorMessage: 'Se requiere un usuario y contraseña'
         })
     }
-})
+}); */
 
-app.get('/prueba', authenticator, function(req, res) {
-    res.send({message: 'Está autenticado, accede a los datos'})
-})
+
+app.post('/login', (req, res) => {
+    if (req.body) {
+        var userData = req.body;
+        // Consulta a la base de datos para encontrar al usuario
+        pool.query('SELECT * FROM USUARIOS WHERE Nombre_Usuario = ?', [userData.username], (error, usersBD) => {
+            if (error) {
+                return res.status(500).send({ errorMessage: 'Error al consultar la base de datos' });
+            }
+
+            if (usersBD.length > 0) {
+                passwordBD = usersBD[0].password;
+
+                // Compara la contraseña del formulario con la contraseña en la base de datos
+                if (userData.password === passwordBD) {
+                    var token = jwt.sign(userData, YOUR_SECRET_KEY)
+                    res.status(200).send({
+                        signed_user: userData,
+                        token: token
+                    })
+                } else {
+                    res.status(403).send({
+                        errorMessage: 'Contraseña incorrecta'
+                    });
+                }
+            } else {
+                res.status(403).send({
+                    errorMessage: 'Usuario no encontrado'
+                });
+            }
+        });
+    } else {
+        res.status(400).send({
+            errorMessage: 'Se requiere un usuario y contraseña'
+        });
+    }
+});
+
+
+
+
+
+
+/* app.get('/prueba', authenticator, function(req, res) {
+    pool.query('Select * from segmentos_clientes', function(err, result, fields) {
+        if (err) {
+            res.send(err).status(400);
+            return;
+        }
+        res.send(result);
+    })
+}); */
 
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");
