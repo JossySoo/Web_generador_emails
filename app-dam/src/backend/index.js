@@ -44,7 +44,7 @@ app.use(express.static('/home/node/app/static/'));
 app.use(cors(corsOptions))
 app.use(myLogger)
 
-app.use('/dispositivo', routerSegmentos)
+app.use('/segmentos', routerSegmentos)
 
 //=======[ Main module code ]==================================================
 

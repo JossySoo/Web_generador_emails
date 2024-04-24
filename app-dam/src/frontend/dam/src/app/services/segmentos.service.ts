@@ -5,15 +5,11 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DispositivoService {
+export class SegmentosService {
 
   constructor(private _http: HttpClient) { }
 
-  getDispositivos (): Promise<any> {
+  getSegmentos (): Promise<any> {
     return firstValueFrom(this._http.get('http://localhost:8000/segmentos'))
-  }
-
-  getPrueba (): Promise<any> {
-    return firstValueFrom(this._http.get('http://localhost:8000/prueba'))
   }
 }
