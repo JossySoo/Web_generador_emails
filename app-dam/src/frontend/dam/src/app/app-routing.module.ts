@@ -22,6 +22,12 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
+  {
+    path: 'emailprev',
+    loadChildren: () => import('./emailprev/emailprev.module').then( m => m.EmailprevPageModule),
+    canActivate: [AuthGuard]
+  },
+
 ];
 
 @NgModule({
