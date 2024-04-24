@@ -8,7 +8,7 @@ var express = require('express');
 var app = express();
 var pool = require('./mysql-connector');
 const jwt = require('jsonwebtoken')
-const routerDispositivo = require('./routes/dispositivos')
+const routerSegmentos = require('./routes/dispositivos')
 
 const YOUR_SECRET_KEY = 'mi llave'
 var testUser = {username: 'test', password: '1234'}
@@ -44,7 +44,7 @@ app.use(express.static('/home/node/app/static/'));
 app.use(cors(corsOptions))
 app.use(myLogger)
 
-app.use('/dispositivo', routerDispositivo)
+app.use('/dispositivo', routerSegmentos)
 
 //=======[ Main module code ]==================================================
 
