@@ -157,6 +157,27 @@ app.post('/emails', (req, res) => {
 });
 
 
+app.get('/emails/:emailId', (req, res) => {
+    const emailId = req.params.emailId; 
+
+    const query = 'SELECT * FROM emails_generados WHERE email_ID = ?';
+    
+    pool.query(query, [emailId], (error, results) => {
+        if (error) {
+            // Manejo de errores de la base de datos
+            console.error('Error al realizar la consulta', error);
+            res.status(500).send('Error al consultar la base de datos');
+        } else if (results.length > 0) {
+            // Envía los datos del email si la consulta fue exitosa y se encontró el email
+            res.json(results[0]);
+        } else {
+            // Si no se encontraron resultados, envía un 404 Not Found
+            res.status(404).send('Email no encontrado');
+        }
+    });
+});
+
+
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");
 });

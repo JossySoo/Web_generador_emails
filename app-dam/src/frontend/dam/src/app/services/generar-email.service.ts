@@ -166,12 +166,18 @@ export class GenerarEmailService {
       next: (response: any) => {
         console.log('Success:', response);
         this.ultimo_emailId=response.id;
+        console.log(response.id)
+        this._router.navigate(['/emailprev/'+response.id])
       },
       error: (error: any) => {
         console.error('Error:', error);
       }
     });
 
+    }
+
+    ultimoEmail(){
+        return this.ultimo_emailId
     }
 
 }
