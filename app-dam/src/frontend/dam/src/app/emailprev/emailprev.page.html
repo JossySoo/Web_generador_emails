@@ -24,7 +24,7 @@
         {{datos_email.parrafo}}
         </ion-item>
         <ion-item *ngIf="datos_email.haveTasa">
-        {{datos_email.tasa}}
+        {{datos_email.tasa | formatoTasa}}
         </ion-item>
         <ion-item *ngIf="datos_email.haveTasa">
           {{datos_email.legal_tasa}}

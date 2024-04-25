@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FormatoTasaPipe implements PipeTransform {
 
   transform(value: number): unknown {
-    return (value*100).toString+"%";
+    return value*100+"%";
   }
 
 }

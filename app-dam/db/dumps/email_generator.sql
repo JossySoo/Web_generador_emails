@@ -114,7 +114,7 @@ BEX',
 '¡Descubre lo que Visa Signature puede hacer por ti!',
 'A nuestros selectos clientes les brindamos acceso a la tarjeta Visa Signature, que ofrece descuentos y beneficios únicos. Disfruta de una línea de crédito de <S/ XX>, exclusivamente durante el mes de marzo. No dejes pasar esta oportunidad limitada.',
 true, 
-5.99,
+0.99,
 'Tasa anual efectiva',
 '<!DOCTYPE html>
 <html>

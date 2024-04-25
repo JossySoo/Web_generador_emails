@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { EmailprevPageRoutingModule } from './emailprev-routing.module';
-
+import { FormatoTasaPipe } from '../pipe/formato-tasa.pipe';
 import { EmailprevPage } from './emailprev.page';
 
 @NgModule({
@@ -15,6 +15,6 @@ import { EmailprevPage } from './emailprev.page';
     IonicModule,
     EmailprevPageRoutingModule
   ],
-  declarations: [EmailprevPage]
+  declarations: [EmailprevPage, FormatoTasaPipe]
 })
 export class EmailprevPageModule {}
