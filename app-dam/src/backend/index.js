@@ -159,7 +159,7 @@ app.post('/emails', (req, res) => {
 
 app.get('/emails/:emailId', (req, res) => {
     const emailId = req.params.emailId; 
-
+    console.log("Recibido "+emailId)
     const query = 'SELECT * FROM emails_generados WHERE email_ID = ?';
     
     pool.query(query, [emailId], (error, results) => {
@@ -169,6 +169,7 @@ app.get('/emails/:emailId', (req, res) => {
             res.status(500).send('Error al consultar la base de datos');
         } else if (results.length > 0) {
             // Envía los datos del email si la consulta fue exitosa y se encontró el email
+            console.log(results[0])
             res.json(results[0]);
         } else {
             // Si no se encontraron resultados, envía un 404 Not Found

@@ -12,8 +12,18 @@ import { ActivatedRoute } from '@angular/router';
 export class EmailprevPage implements OnInit {
   uri = 'http://localhost:8000/emails/'
   html_preview='Sin email generado aún'
-  datos_email = {titulo1:'',titulo2:'',fraseinicial:'',parrafo:'' , haveTasa:false ,
-  segmentoCliente:'', tasa:'' , legal_tasa:'' }
+  datos_email = {email_ID: 0,
+    usuario_ID: 0,
+    segmento: '',
+    fecha_creacion: new Date(),
+    titulo1: '',
+    titulo2: '',
+    fraseinicial: '',
+    parrafo: '',
+    haveTasa: false,
+    tasa: 0,
+    legal_tasa: '',
+    html: ''}
 
   constructor(private _generarEmailService: GenerarEmailService,
               private _http: HttpClient,
@@ -23,11 +33,18 @@ export class EmailprevPage implements OnInit {
     // this.html_preview=this._generarEmailService.mostrarEmail ()
   
   }
-  ionViewWillEnter () {
+  async ionViewWillEnter () {
     console.log(`Me llegó el id: ${Number(this._actRouter.snapshot.paramMap.get('id'))}`)
 
     if (this._actRouter.snapshot.paramMap.get('id')) {
-       this.getEmail (Number(this._actRouter.snapshot.paramMap.get('id')))
+       await this.getEmail (Number(this._actRouter.snapshot.paramMap.get('id')))
+       .then((email_bd) => {
+         this.datos_email =email_bd
+         console.log(this.datos_email)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
     }
 
   }
