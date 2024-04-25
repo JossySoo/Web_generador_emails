@@ -130,10 +130,6 @@ app.post('/login', (req, res) => {
 });
 
 
-
-
-
-
 /* app.get('/prueba', authenticator, function(req, res) {
     pool.query('Select * from segmentos_clientes', function(err, result, fields) {
         if (err) {

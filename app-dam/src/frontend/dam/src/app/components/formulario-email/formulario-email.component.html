@@ -2,32 +2,32 @@
 <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
   <ion-list>
     <ion-item>
-      <ion-textarea formControlName="titulo1"  label="Primera linea del título:" labelPlacement="floating"></ion-textarea>
+      <ion-textarea [(ngModel)]="datos_email.titulo1" formControlName="titulo1"  label="Primera linea del título:" labelPlacement="floating"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-textarea formControlName="titulo2"  label="Segunda linea del título:" labelPlacement="floating"></ion-textarea>
+      <ion-textarea [(ngModel)]="datos_email.titulo2" formControlName="titulo2"  label="Segunda linea del título:" labelPlacement="floating"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-select formControlName="segmentoCliente"  label="Segmento de Clientes:" interface="popover">
+      <ion-select [(ngModel)]="datos_email.segmentoCliente" formControlName="segmentoCliente"  label="Segmento de Clientes:" interface="popover">
         <div *ngFor="let segmento of lista_segmentos">
         <ion-select-option value={{segmento}}>{{segmento}}</ion-select-option>
         </div>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-textarea formControlName="fraseinicial"  label="Frase inicial del email:" labelPlacement="floating"></ion-textarea>
+      <ion-textarea [(ngModel)]="datos_email.fraseinicial" formControlName="fraseinicial"  label="Frase inicial del email:" labelPlacement="floating"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-textarea formControlName="parrafo"  label="Párrafo del email:" [autoGrow]="true"></ion-textarea>
+      <ion-textarea [(ngModel)]="datos_email.parrafo" formControlName="parrafo"  label="Párrafo del email:" [autoGrow]="true"></ion-textarea>
     </ion-item>
     <ion-item >
-      <ion-checkbox formControlName="haveTasa" slot="start" justify="space-between">¿Alguna tasa que mostrar en el legal?</ion-checkbox>
+      <ion-checkbox [(ngModel)]="datos_email.haveTasa" formControlName="haveTasa" slot="start" justify="space-between">¿Alguna tasa que mostrar en el legal?</ion-checkbox>
     </ion-item>
     <ion-item *ngIf="emailForm.controls['haveTasa'].value">
-      <ion-input formControlName="tasa"  type="number" label="Tasa:"></ion-input>
+      <ion-input [(ngModel)]="datos_email.tasa" formControlName="tasa"  type="number" label="Tasa:"></ion-input>
     </ion-item>
     <ion-item *ngIf="emailForm.controls['haveTasa'].value">
-      <ion-textarea formControlName="legal_tasa"  label="Texto legal de la tasa:" [autoGrow]="true"></ion-textarea>
+      <ion-textarea [(ngModel)]="datos_email.legal_tasa" formControlName="legal_tasa"  label="Texto legal de la tasa:" [autoGrow]="true"></ion-textarea>
     </ion-item>
   </ion-list>
 
