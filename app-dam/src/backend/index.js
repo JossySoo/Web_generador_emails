@@ -9,6 +9,7 @@ var app = express();
 var pool = require('./mysql-connector');
 const jwt = require('jsonwebtoken')
 const routerSegmentos = require('./routes/segmentos')
+let lastuser=0
 
 const YOUR_SECRET_KEY = 'mi llave'
 var testUser = {username: 'test', password: '1234'}
@@ -103,7 +104,7 @@ app.post('/login', (req, res) => {
 
             if (usersBD.length > 0) {
                 passwordBD = usersBD[0].password;
-
+                lastuser=usersBD[0].usuario_ID
                 // Compara la contraseña del formulario con la contraseña en la base de datos
                 if (userData.password === passwordBD) {
                     var token = jwt.sign(userData, YOUR_SECRET_KEY)
@@ -130,15 +131,31 @@ app.post('/login', (req, res) => {
 });
 
 
-/* app.get('/prueba', authenticator, function(req, res) {
-    pool.query('Select * from segmentos_clientes', function(err, result, fields) {
-        if (err) {
-            res.send(err).status(400);
-            return;
-        }
-        res.send(result);
-    })
-}); */
+app.post('/emails', (req, res) => {
+    const {segmentoCliente, titulo1, titulo2, fraseinicial, parrafo, haveTasa, tasa, legal_tasa, html } = req.body;
+    // Queda pendiente hacer mejora para conseguir el usuario mediante el token
+    usuario_ID=lastuser
+    now = new Date()
+    fecha_creacion= now.toISOString().slice(0, 10)
+    console.log([usuario_ID, segmentoCliente, fecha_creacion, titulo1, titulo2, fraseinicial, parrafo, haveTasa, tasa, legal_tasa])
+    segmento=segmentoCliente
+
+    const sql = `INSERT INTO emails_generados 
+                 (usuario_ID, segmento, fecha_creacion, titulo1, titulo2, fraseinicial, parrafo, haveTasa, tasa, legal_tasa, html) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    pool.query(sql, [usuario_ID, segmento, fecha_creacion, titulo1, titulo2, fraseinicial, parrafo, haveTasa, tasa, legal_tasa, html], (err, results) => {
+    if (err) {
+        console.error('Error al insertar en la base de datos', err);
+        res.status(500).send('Error en el servidor');
+    } else {
+        // Envía el ID al frontend
+        res.status(201).send({ message: 'Email insertado correctamente', id: results.insertId });
+    }
+    }); 
+              
+});
+
 
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");

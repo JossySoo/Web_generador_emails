@@ -15,8 +15,7 @@ export class EmailprevPage implements OnInit {
 
   ngOnInit() {
     // this.html_preview=this._generarEmailService.mostrarEmail ()
-    this.datos_email=this._generarEmailService.mostrarEmail()
-    console.log(this._generarEmailService.mostrarEmail())
+  
     console.log(this.datos_email)
   }
   

@@ -52,7 +52,7 @@ export class FormEmailComponent implements OnInit {
                       this.datos_email.parrafo,
                       this.datos_email.haveTasa,
                       this.datos_email.segmentoCliente, 
-                      (this.datos_email.tasa*100).toString+"%" , 
+                      this.datos_email.tasa, 
                       this.datos_email.legal_tasa)
             } else{
               this._generarEmailService.generarEmail(

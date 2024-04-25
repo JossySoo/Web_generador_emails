@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 })
 export class GenerarEmailService {
   uri = 'http://localhost:8000'
-  html=""
   datos_email = {titulo1:'',titulo2:'',fraseinicial:'',parrafo:'' , haveTasa:false ,
-                  segmentoCliente:'', tasa:'' , legal_tasa:'' }
+                  segmentoCliente:'', tasa:0.0 , legal_tasa:'' ,html:''}
   prueba="pasa la voz"
+  ultimo_emailId=0
   constructor(private _http: HttpClient, private _router: Router) { }
 
   generarEmail (titulo1:string,titulo2:string,fraseinicial:string,parrafo:string ,haveTasa:boolean ,
-                segmentoCliente:string, tasa:string ='', legal_tasa:string ='' ) {
+                segmentoCliente:string, tasa:number =0.0, legal_tasa:string ='' ) {
     this.datos_email.titulo1=titulo1
     this.datos_email.titulo2=titulo2
     this.datos_email.fraseinicial=fraseinicial
@@ -25,7 +25,7 @@ export class GenerarEmailService {
     this.datos_email.tasa=tasa
     this.datos_email.legal_tasa=legal_tasa
     
-    this.html=`<!DOCTYPE html>
+    this.datos_email.html=`<!DOCTYPE html>
 <html>
     <head>
         <title></title>
@@ -113,7 +113,7 @@ export class GenerarEmailService {
                     </tr>
                     <tr>
                         <td valign="top" width="83" height="21" style="font-size:18px;font-family:Helvetica,Tahoma,Arial;color:#414042;line-height:14px;text-align:left">
-                            <strong><em>${tasa}</em></strong>
+                            <strong><em>${(this.datos_email.tasa*100).toString+"%"}</em></strong>
                         </td>
                         <td width="20" style="line-height:1px" rowspan="2">
                             <img style="display:block" src="img/derecha.jpg" width="20" height="52" class="CToWUd" data-bit="iit">
@@ -154,14 +154,24 @@ export class GenerarEmailService {
 </table></body></html>`
 
     console.log("Se generó el email")
-    console.log(this.datos_email)
-    console.log(this.html)
+    console.log(this.datos_email.html)
+
+    this.guardarEmail()
 
   }
+//   localStorage.getItem('token')
 
+  guardarEmail() {
+    this._http.post(this.uri+ '/emails', this.datos_email, { headers: { 'Content-Type': 'application/json' } }).subscribe({
+      next: (response: any) => {
+        console.log('Success:', response);
+        this.ultimo_emailId=response.id;
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
 
-  mostrarEmail () {
-    return this.datos_email
-  }
+    }
 
 }
