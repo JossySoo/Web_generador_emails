@@ -15,9 +15,14 @@ export class FormEmailComponent implements OnInit {
 
   lista_segmentos=[]
   emailForm = new FormBuilder().group({
-    titulo1: ['', [Validators.required, Validators.minLength(3)]],
-    favoriteFruit: ['', [Validators.required]], // Ion-select para frutas
-    haveTasa: ['', [Validators.required]] // Checkbox para términos y condiciones
+    titulo1: ['', [Validators.required, Validators.minLength(5)]],
+    titulo2: ['', [Validators.required, Validators.minLength(5)]],
+    segmentoCliente: ['', [Validators.required]], 
+    fraseinicial: ['', [Validators.required, Validators.minLength(5)]],
+    parrafo: ['', [Validators.required, Validators.minLength(5)]],
+    haveTasa: [false, [Validators.required]],
+    tasa: [''],
+    legal_tasa: ['']
   })
 
   async ngOnInit() {
@@ -29,7 +34,6 @@ export class FormEmailComponent implements OnInit {
       .catch((error) => {
         console.log(error)
       })
-    console.log('Me ejecuto primero')
   }
 
   onSubmit() {
