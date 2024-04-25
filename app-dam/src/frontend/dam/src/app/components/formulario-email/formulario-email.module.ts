@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormEmailComponent } from './formulario-email.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [FormEmailComponent],
   imports: [
