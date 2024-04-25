@@ -78,6 +78,13 @@ CREATE TABLE `emails_generados` (
   `usuario_ID` int(11) DEFAULT NULL,
   `segmento` varchar(20) DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
+    `titulo1` varchar(500) DEFAULT NULL,
+    `titulo2` varchar(500) DEFAULT NULL,
+    `fraseinicial` varchar(500) DEFAULT NULL,
+    `parrafo` text DEFAULT NULL,
+    `haveTasa` boolean DEFAULT NULL,
+    `tasa` DECIMAL(10, 2) DEFAULT NULL,
+    `legal_tasa` text DEFAULT NULL,
   `html` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,8 +93,29 @@ CREATE TABLE `emails_generados` (
 -- Volcado de datos para la tabla `Mediciones`
 --
 
-INSERT INTO `emails_generados` (`email_ID`, `usuario_ID`, `segmento`, `fecha_creacion`,`html`) VALUES
-(1, 1, 'BEX', '2024-02-26', 
+INSERT INTO `emails_generados` (  `email_ID`, 
+  `usuario_ID`, 
+  `segmento`, 
+  `fecha_creacion`, 
+  `titulo1`, 
+  `titulo2`, 
+  `fraseinicial`, 
+  `parrafo`, 
+  `haveTasa`, 
+  `tasa`, 
+  `legal_tasa`, 
+  `html`) VALUES
+(1, 
+1, '
+BEX', 
+'2024-02-26', 
+'Accede a la mejor tarjeta',
+'Visa Signature con beneficios exclusivos',
+'¡Descubre lo que Visa Signature puede hacer por ti!',
+'A nuestros selectos clientes les brindamos acceso a la tarjeta Visa Signature, que ofrece descuentos y beneficios únicos. Disfruta de una línea de crédito de <S/ XX>, exclusivamente durante el mes de marzo. No dejes pasar esta oportunidad limitada.',
+true, 
+5.99,
+'Tasa anual efectiva',
 '<!DOCTYPE html>
 <html>
     <head>
@@ -208,7 +236,6 @@ INSERT INTO `emails_generados` (`email_ID`, `usuario_ID`, `segmento`, `fecha_cre
 		</tr>
         
 </table></body></html>'
-
 );
 
 

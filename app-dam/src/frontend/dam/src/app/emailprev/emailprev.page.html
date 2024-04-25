@@ -10,6 +10,26 @@
       <ion-title size="large">emailprev</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div> {{ html_preview }} </div>
+  <ion-card>
+    <img alt="Tarjeta" src="assets/img/visa-signature.png" />
+    <ion-card-header>
+      <ion-card-title>{{datos_email.titulo1}}</ion-card-title>
+      <ion-card-title>{{datos_email.titulo2}}</ion-card-title>
+      <ion-card-subtitle>{{datos_email.fraseinicial}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+        {{datos_email.parrafo}}
+        </ion-item>
+        <ion-item>
+        {{datos_email.tasa}}
+        </ion-item>
+        <ion-item>
+          {{datos_email.legal_tasa}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
-

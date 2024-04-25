@@ -9,15 +9,22 @@ import { Router } from '@angular/router';
 export class GenerarEmailService {
   uri = 'http://localhost:8000'
   html=""
+  datos_email = {titulo1:'',titulo2:'',fraseinicial:'',parrafo:'' , haveTasa:false ,
+                  segmentoCliente:'', tasa:'' , legal_tasa:'' }
+  prueba="pasa la voz"
   constructor(private _http: HttpClient, private _router: Router) { }
-
-  mostrarEmail () {
-    return "prueba email"
-  }
 
   generarEmail (titulo1:string,titulo2:string,fraseinicial:string,parrafo:string ,haveTasa:boolean ,
                 segmentoCliente:string, tasa:string ='', legal_tasa:string ='' ) {
-
+    this.datos_email.titulo1=titulo1
+    this.datos_email.titulo2=titulo2
+    this.datos_email.fraseinicial=fraseinicial
+    this.datos_email.parrafo=parrafo
+    this.datos_email.haveTasa=haveTasa
+    this.datos_email.segmentoCliente=segmentoCliente
+    this.datos_email.tasa=tasa
+    this.datos_email.legal_tasa=legal_tasa
+    
     this.html=`<!DOCTYPE html>
 <html>
     <head>
@@ -147,8 +154,14 @@ export class GenerarEmailService {
 </table></body></html>`
 
     console.log("Se generó el email")
+    console.log(this.datos_email)
     console.log(this.html)
 
+  }
+
+
+  mostrarEmail () {
+    return this.datos_email
   }
 
 }
