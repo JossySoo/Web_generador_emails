@@ -23,10 +23,10 @@
         <ion-item>
         {{datos_email.parrafo}}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="datos_email.haveTasa">
         {{datos_email.tasa}}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="datos_email.haveTasa">
           {{datos_email.legal_tasa}}
         </ion-item>
       </ion-list>
